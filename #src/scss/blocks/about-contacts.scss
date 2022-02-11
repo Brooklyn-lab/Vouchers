@@ -1,0 +1,32 @@
+.about {
+  &__text {
+    @include fonts(16px, 19px, 400);
+    margin-bottom: 20px;
+  }
+
+  &__text-strong {
+    @include fonts(16px, 19px, 700);
+    margin-bottom: 20px;
+  }
+
+  &__list {
+    margin-bottom: 20px;
+  }
+
+  &__item {
+    position: relative;
+    padding-left: 25px;
+
+    &::after {
+      position: absolute;
+      content: '';
+      width: 5px;
+      height: 5px;
+      left: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: $black;
+      border-radius: 50%;
+    }
+  }
+}

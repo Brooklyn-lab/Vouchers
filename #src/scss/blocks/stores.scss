@@ -1,0 +1,116 @@
+.stores {
+  &__body {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    margin: 0 -20px;
+
+    @media screen and (max-width: 768px) {
+      margin: 0 -15px;
+    }
+
+    @media screen and (max-width: 576px) {
+      margin: 0;
+    }
+  }
+
+  &__item {
+    max-width: 270px;
+    height: 286px;
+    width: 100%;
+    padding: 40px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    background: #ffffff;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    margin: 0 20px 60px;
+
+    @media screen and (max-width: 768px) {
+      margin: 0 15px 40px;
+    }
+
+    @media screen and (max-width: 576px) {
+      margin: 0 20px 20px;
+    }
+  }
+
+  &__image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+
+  &__button {
+    width: 100%;
+    max-height: 49px;
+    height: 100%;
+    background: #ffc200;
+    border-radius: 5px;
+    text-align: center;
+    color: $white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-transform: uppercase;
+    @include fonts(16px, 19px, 600);
+    cursor: pointer;
+  }
+
+  &__empty-search {
+    @include fonts(24px, 29px, 700);
+    margin: 100px 0;
+  }
+}
+.stores-preloader {
+  padding: 30px 0;
+
+  &__row {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    width: 70px;
+    height: 70px;
+    margin-top: -35px;
+    margin-left: -35px;
+    text-align: center;
+    animation: preloader-rotate 2s infinite linear;
+  }
+
+  &__item {
+    position: absolute;
+    display: inline-block;
+    top: 0;
+    background-color: $black;
+    border-radius: 100%;
+    width: 35px;
+    height: 35px;
+    animation: preloader-bounce 2s infinite ease-in-out;
+
+    &:last-child {
+      top: auto;
+      bottom: 0;
+      animation-delay: -1s;
+    }
+  }
+}
+@keyframes preloader-rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes preloader-bounce {
+  0%,
+  100% {
+    transform: scale(0);
+  }
+
+  50% {
+    transform: scale(1);
+  }
+}

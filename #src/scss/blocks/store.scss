@@ -1,0 +1,160 @@
+.store {
+  padding: 0 0 120px;
+
+  &__body {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__company {
+    background: $white;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    height: 300px;
+    width: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__company-logo {
+  }
+
+  &__coupons {
+    max-width: 840px;
+    width: 100%;
+  }
+
+  &__coupon {
+  }
+}
+
+.coupon {
+  background: #ffffff;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+  padding: 25px 20px;
+  width: 100%;
+
+  &:not(:last-child) {
+    margin-bottom: 30px;
+  }
+
+  &__header {
+    color: #8fb65b;
+    text-align: right;
+    @include fonts(18px, 22px, 600);
+  }
+
+  &__content {
+    margin-top: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__shorts {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 320px;
+    width: 100%;
+  }
+
+  &__shorts-text {
+    @include fonts(24px, 29px, 700);
+  }
+
+  &__about {
+    width: 100%;
+  }
+
+  &__title {
+    @include fonts(18px, 22px, 600);
+    margin-bottom: 25px;
+  }
+
+  &__description {
+    color: #d5d5d5;
+    margin-bottom: 25px;
+  }
+
+  &__text-strong {
+    font-weight: 700;
+  }
+
+  &__description-title {
+    font-weight: 700;
+    display: block;
+  }
+
+  &__details-btn {
+    @include fonts(16px, 19px, 400);
+    cursor: pointer;
+  }
+
+  &__footer-body {
+    margin-top: 29px;
+    padding-top: 29px;
+    border-top: 1px solid #ababab;
+    display: none;
+
+    &.show {
+      display: block;
+    }
+  }
+
+  &__footer-title {
+    @include fonts(16px, 19px, 700);
+  }
+
+  &__footer-list {
+    margin-top: 19px;
+  }
+
+  &__footer-list-item {
+    @include fonts(16px, 19px, 400);
+    margin-bottom: 19px;
+
+    &_strong {
+      font-weight: 700;
+    }
+  }
+}
+
+.coupon-item {
+  &__body {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 40px 120px;
+  }
+
+  &__company {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  &__image {
+    margin-bottom: 30px;
+  }
+
+  &__description {
+    color: $black;
+  }
+
+  .coupon__description {
+    color: $black;
+  }
+
+  &__footer-title,
+  &__footer-list {
+    color: #d5d5d5;
+  }
+
+  &__about {
+    max-width: 460px;
+  }
+}
