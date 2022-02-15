@@ -59,6 +59,14 @@
     text-transform: uppercase;
     @include fonts(16px, 19px, 600);
     cursor: pointer;
+    border: 1px solid #ffc200;
+    transition: all 0.3s ease 0s;
+
+    &:hover,
+    &:focus {
+      background: $white;
+      color: $black;
+    }
   }
 
   &__empty-search {

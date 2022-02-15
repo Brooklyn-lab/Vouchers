@@ -1,13 +1,4 @@
 $(document).ready(function () {
-  //---------Loader----------
-  window.onload = function () {
-    document.body.classList.add('loaded_hiding');
-    window.setTimeout(function () {
-      document.body.classList.add('loaded');
-      document.body.classList.remove('loaded_hiding');
-    }, 500);
-  };
-
   // -------------Logo---------------
 
   $('.disable').on('click', (evt) => evt.preventDefault());

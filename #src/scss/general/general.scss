@@ -7,7 +7,7 @@
   box-sizing: border-box;
 }
 body {
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Inter', sans-serif;
   line-height: 1.5;
   min-height: 100vh;
   display: flex;
@@ -27,9 +27,6 @@ li {
   list-style: none;
 }
 a {
-  text-decoration: none;
-}
-a:hover {
   text-decoration: none;
 }
 body,
@@ -138,11 +135,19 @@ $md4: 479.98;
   background: #ffc200;
   text-transform: uppercase;
   @include fonts(16px, 19px, 600);
-  padding: 15px 60px;
+  padding: 15px 45px;
   border-radius: 5px;
   text-align: center;
+  border: 1px solid #ffc200;
   color: $white;
   max-width: 197px;
   display: inline-block;
   cursor: pointer;
+  transition: all 0.3s ease 0s;
+
+  &:hover,
+  &:focus {
+    background: $white;
+    color: $black;
+  }
 }

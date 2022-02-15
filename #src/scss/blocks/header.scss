@@ -58,6 +58,11 @@
   &__nav-item-link {
     color: #222222;
     @include fonts(14px, 17px, 400);
+
+    &:hover {
+      transition: all 0.3s ease 0s;
+      text-decoration: underline;
+    }
   }
 
   &__search {
@@ -80,17 +85,6 @@
 
     &::placeholder {
       color: #d3d3d3;
-    }
-
-    &:focus,
-    &:active {
-      &::placeholder {
-        color: #222222;
-      }
-
-      .header__search-icon-color {
-        fill: #222222;
-      }
     }
   }
 

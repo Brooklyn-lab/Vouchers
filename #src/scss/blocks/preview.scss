@@ -94,6 +94,14 @@
     @include fonts(16px, 19px, 600);
     margin-bottom: 20px;
     cursor: pointer;
+    border: 1px solid #ffc200;
+    transition: all 0.3s ease 0s;
+
+    &:hover,
+    &:focus {
+      background: $white;
+      color: $black;
+    }
   }
 
   &__coupons-item-date {

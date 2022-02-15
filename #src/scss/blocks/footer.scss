@@ -58,6 +58,11 @@
 
     a {
       color: #91969b;
+      transition: all 0.3s ease 0s;
+
+      &:hover {
+        text-decoration: underline;
+      }
     }
   }
 

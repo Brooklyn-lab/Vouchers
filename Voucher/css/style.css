@@ -1,25 +1,33 @@
 @font-face {
-  font-family: "OpenSans";
+  font-family: "Inter";
   font-display: swap;
-  src: url("../fonts/OpenSans-Regular.woff") format("woff"), url("../fonts/OpenSans-Regular.woff2") format("woff2");
+  src: url("../fonts/Inter-Bold.woff") format("woff"), url("../fonts/Inter-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Inter";
+  font-display: swap;
+  src: url("../fonts/Inter-Medium.woff") format("woff"), url("../fonts/Inter-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Inter";
+  font-display: swap;
+  src: url("../fonts/Inter-Regular.woff") format("woff"), url("../fonts/Inter-Regular.woff2") format("woff2");
   font-weight: 400;
   font-style: normal;
 }
 
 @font-face {
-  font-family: "OpenSans";
+  font-family: "Inter";
   font-display: swap;
-  src: url("../fonts/OpenSans-Bold.woff") format("woff"), url("../fonts/OpenSans-Bold.woff2") format("woff2");
+  src: url("../fonts/Inter-SemiBold.woff") format("woff"), url("../fonts/Inter-SemiBold.woff2") format("woff2");
   font-weight: 600;
-  font-style: bold;
-}
-
-@font-face {
-  font-family: "Ubuntu";
-  font-display: swap;
-  src: url("../fonts/Ubuntu-Medium.woff") format("woff"), url("../fonts/Ubuntu-Medium.woff2") format("woff2");
-  font-weight: 500;
-  font-style: medium;
+  font-style: normal;
 }
 
 *,
@@ -33,7 +41,7 @@
 }
 
 body {
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Inter', sans-serif;
   line-height: 1.5;
   min-height: 100vh;
   display: -webkit-box;
@@ -60,10 +68,6 @@ li {
 }
 
 a {
-  text-decoration: none;
-}
-
-a:hover {
   text-decoration: none;
 }
 
@@ -152,13 +156,23 @@ img {
   font-size: 16px;
   line-height: 118.75%;
   font-weight: 600;
-  padding: 15px 60px;
+  padding: 15px 45px;
   border-radius: 5px;
   text-align: center;
+  border: 1px solid #ffc200;
   color: #ffffff;
   max-width: 197px;
   display: inline-block;
   cursor: pointer;
+  -webkit-transition: all 0.3s ease 0s;
+  -o-transition: all 0.3s ease 0s;
+  transition: all 0.3s ease 0s;
+}
+
+.button:hover,
+.button:focus {
+  background: #ffffff;
+  color: #222222;
 }
 
 .preloader {
@@ -290,6 +304,13 @@ img {
   font-weight: 400;
 }
 
+.header__nav-item-link:hover {
+  -webkit-transition: all 0.3s ease 0s;
+  -o-transition: all 0.3s ease 0s;
+  transition: all 0.3s ease 0s;
+  text-decoration: underline;
+}
+
 .header__search {
   grid-area: serch;
   border: 1px solid rgba(34, 34, 34, 0.2);
@@ -323,32 +344,6 @@ img {
 
 .header__search-input::placeholder {
   color: #d3d3d3;
-}
-
-.header__search-input:focus::-webkit-input-placeholder, .header__search-input:active::-webkit-input-placeholder {
-  color: #222222;
-}
-
-.header__search-input:focus::-moz-placeholder, .header__search-input:active::-moz-placeholder {
-  color: #222222;
-}
-
-.header__search-input:focus:-ms-input-placeholder, .header__search-input:active:-ms-input-placeholder {
-  color: #222222;
-}
-
-.header__search-input:focus::-ms-input-placeholder, .header__search-input:active::-ms-input-placeholder {
-  color: #222222;
-}
-
-.header__search-input:focus::placeholder,
-.header__search-input:active::placeholder {
-  color: #222222;
-}
-
-.header__search-input:focus .header__search-icon-color,
-.header__search-input:active .header__search-icon-color {
-  fill: #222222;
 }
 
 .header__search-wrapper {
@@ -492,6 +487,16 @@ img {
   font-weight: 600;
   margin-bottom: 20px;
   cursor: pointer;
+  border: 1px solid #ffc200;
+  -webkit-transition: all 0.3s ease 0s;
+  -o-transition: all 0.3s ease 0s;
+  transition: all 0.3s ease 0s;
+}
+
+.preview__coupons-item-button:hover,
+.preview__coupons-item-button:focus {
+  background: #ffffff;
+  color: #222222;
 }
 
 .preview__coupons-item-date {
@@ -823,6 +828,16 @@ img {
   line-height: 118.75%;
   font-weight: 600;
   cursor: pointer;
+  border: 1px solid #ffc200;
+  -webkit-transition: all 0.3s ease 0s;
+  -o-transition: all 0.3s ease 0s;
+  transition: all 0.3s ease 0s;
+}
+
+.stores__button:hover,
+.stores__button:focus {
+  background: #ffffff;
+  color: #222222;
 }
 
 .stores__empty-search {
@@ -976,6 +991,13 @@ img {
 
 .footer__list-item a {
   color: #91969b;
+  -webkit-transition: all 0.3s ease 0s;
+  -o-transition: all 0.3s ease 0s;
+  transition: all 0.3s ease 0s;
+}
+
+.footer__list-item a:hover {
+  text-decoration: underline;
 }
 
 .footer__bottom {
