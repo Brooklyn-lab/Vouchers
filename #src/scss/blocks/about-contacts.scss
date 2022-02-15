@@ -1,4 +1,10 @@
 .about {
+  padding: 0 0 120px;
+
+  @media screen and (max-width: 576px) {
+    padding: 0 0 60px;
+  }
+
   &__text {
     @include fonts(16px, 19px, 400);
     margin-bottom: 20px;

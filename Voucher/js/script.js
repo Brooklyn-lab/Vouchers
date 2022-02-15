@@ -8,6 +8,35 @@ $(document).ready(function () {
     }, 500);
   };
 
+  // -------------Logo---------------
+
+  $('.disable').on('click', (evt) => evt.preventDefault());
+
+  // ---------- Burger ------------
+
+  const burgerShow = $('.burger, .header__nav-wrapper, body');
+  $('.header__burger').on('click', () => burgerShow.toggleClass('show'));
+
+  // ---------- Slider -------------
+
+  const swiper = new Swiper('.preview__slider', {
+    slidesPerView: 1,
+    loop: true,
+    centeredSlides: true,
+    autoplay: {
+      delay: 3000,
+      disableOnInteraction: false,
+    },
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
+  });
+
+  // ----------- goBackButton --------------
+
+  $('#goBack').on('click', () => history.back());
+
   // ----------- Data based -----------------
 
   const DATABASE = {
@@ -289,73 +318,143 @@ $(document).ready(function () {
     ],
   };
 
-  // ---------- Burger ------------
-
-  const burgerShow = $('.burger, .header__nav-wrapper, body');
-  $('.header__burger').on('click', () => burgerShow.toggleClass('show'));
-
-  // ---------- Slider -------------
-
-  const swiper = new Swiper('.preview__slider', {
-    slidesPerView: 1,
-    loop: true,
-    centeredSlides: true,
-    autoplay: {
-      delay: 3000,
-      disableOnInteraction: false,
-    },
-    navigation: {
-      nextEl: '.swiper-button-next',
-      prevEl: '.swiper-button-prev',
-    },
-  });
-
-  // ----------- goBackButton --------------
-
-  $('#goBack').on('click', () => history.back());
-
   // ----------------- Resize ------------------------
 
   const mediaQuery = window.matchMedia('(max-width: 768px)');
-  let count = 5;
-  mediaQuery.matches ? (count = 5) : (count = 10);
+  let countStores = 5;
+  let countCoupons = 2;
+
+  if (mediaQuery.matches) {
+    countStores = 5;
+    countCoupons = 2;
+  } else {
+    countStores = 10;
+    countCoupons = 8;
+  }
 
   // --------------------------------------------
 
+  const couponsWrapper = $('.preview__coupons-body');
   const storesWrapper = $('.preview__stores-body');
   const searchCompanies = [];
   $('#stores-loader').fadeOut();
 
-  // ----------- Stores in home page -----------
+  // ----------- Coupons and Stores in home page -----------
 
-  if (DATABASE.companies.length !== 0) {
-    DATABASE.companies.map((companyItem, index) => {
-      if (index >= count) {
-        return;
-      } else {
-        storesWrapper.append(function () {
+  // --------- random array items ------------
+
+  function randoms(arr, length) {
+    return first(shuffle(arr), length);
+  }
+
+  function first(arr, length) {
+    return arr.slice(0, length);
+  }
+
+  function shuffle(arr) {
+    let result = [];
+
+    while (arr.length > 0) {
+      let random = getRandomInt(0, arr.length - 1);
+      let elem = arr.splice(random, 1)[0];
+      result.push(elem);
+    }
+
+    return result;
+  }
+
+  function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+
+  //-------------------------------------------------
+
+  //  Coupons
+
+  const companies = DATABASE.companies.slice();
+  const rendomCompanies = randoms(companies, countCoupons);
+
+  rendomCompanies.forEach((store) => {
+    let couponShortText = '';
+    let couponId = 1;
+    store.coupons.forEach((coupon) => {
+      couponShortText = coupon.shortText;
+      couponId = coupon.id;
+    });
+
+    couponsWrapper.append(() => {
+      return $('<div></div>', {
+        class: 'preview__coupons-item',
+      })
+        .append(() => {
           return $('<div></div>', {
-            class: 'preview__stores-item',
-            'data-id': companyItem.id,
-          }).append(function () {
+            class: 'preview__coupons-item-logo',
+          }).append(() => {
             return $('<img>', {
-              src: companyItem.logo,
-              alt: companyItem.title,
+              src: store.logo,
+              alt: store.title,
             });
           });
+        })
+        .append(() => {
+          return $('<p></p>', {
+            class: 'preview__coupons-item-title',
+            text: couponShortText,
+          });
+        })
+        .append(() => {
+          return $('<div></div>', {
+            'data-id': store.id,
+            'data-coupon-id': couponId,
+            class: 'preview__coupons-item-button',
+            text: 'View Details',
+          });
+        })
+        .append(() => {
+          return $('<p></p>', {
+            class: 'preview__coupons-item-date',
+            text: 'Expires On : 2023-10-31',
+          });
         });
-      }
+    });
+  });
+
+  couponsWrapper.on('click', '.preview__coupons-item-button', function () {
+    localStorage.setItem('storeId', $(this).attr('data-id'));
+    localStorage.setItem('couponId', $(this).attr('data-coupon-id'));
+    // подставить в url href с доменом /coupon.html оставляем
+    location.href = 'https://rwssurvey.store/Voucher/coupon.html';
+  });
+
+  //  Stores
+
+  if (DATABASE.companies.length !== 0) {
+    const companies = DATABASE.companies.slice();
+    const rendomCompanies = randoms(companies, countStores);
+
+    rendomCompanies.map((store) => {
+      storesWrapper.append(function () {
+        return $('<div></div>', {
+          class: 'preview__stores-item',
+          'data-id': store.id,
+        }).append(function () {
+          return $('<img>', {
+            src: store.logo,
+            alt: store.title,
+          });
+        });
+      });
     });
   } else {
     $('.preview__stores').remove();
   }
 
-  let companyId = localStorage.getItem('companyId');
+  const storeId = localStorage.getItem('storeId');
 
   const postLicalStorageDataId = function () {
-    localStorage.setItem('companyId', $(this).attr('data-id'));
+    localStorage.setItem('storeId', $(this).attr('data-id'));
     // подставить в url href с доменом /coupons.html оставляем
-    location.href = 'http://localhost:3000/coupons.html';
+    location.href = 'https://rwssurvey.store/Voucher/coupons.html';
   };
 
   storesWrapper.on('click', '.preview__stores-item', postLicalStorageDataId);
@@ -363,7 +462,7 @@ $(document).ready(function () {
   // ---------- All Stores ---------------
   const allStoresWrapper = $('.stores__body');
   let page = 1;
-  const limit = 8;
+  const limit = Infinity;
 
   const getPosts = function (pageArg, arr) {
     const to = pageArg * limit;
@@ -371,25 +470,27 @@ $(document).ready(function () {
     return arr.slice(from, to);
   };
 
-  window.addEventListener('scroll', () => {
-    if (
-      window.scrollY + window.innerHeight >=
-      document.documentElement.scrollHeight
-    ) {
-      page++;
-      if (getPosts(page, DATABASE.companies).length !== 0) {
-        $('#stores-loader').fadeIn().delay(500).fadeOut();
-        $('body').addClass('show');
-        setTimeout(() => {
-          createAllStoresTemplate(getPosts(page, DATABASE.companies));
-          $('body').removeClass('show');
-          console.log(DATABASE.companies);
-        }, 500);
-      } else {
-        return;
-      }
-    }
-  });
+  // if (window.location.href.includes('stores')) {
+  //   window.addEventListener('scroll', () => {
+  //     if (
+  //       window.scrollY + window.innerHeight >=
+  //       document.documentElement.scrollHeight
+  //     ) {
+  //       page++;
+  //       if (getPosts(page, DATABASE.companies).length !== 0) {
+  //         $('#stores-loader').fadeIn().delay(500).fadeOut();
+  //         $('body').addClass('show');
+  //         setTimeout(() => {
+  //           createAllStoresTemplate(getPosts(page, DATABASE.companies));
+  //           $('body').removeClass('show');
+  //           console.log(DATABASE.companies);
+  //         }, 500);
+  //       } else {
+  //         return;
+  //       }
+  //     }
+  //   });
+  // }
 
   const createAllStoresTemplate = (array, isSearch) => {
     if (array.length === 0 && isSearch) {
@@ -460,64 +561,68 @@ $(document).ready(function () {
     localStorage.removeItem('searchValue');
   }
 
-  searchBtn.on('click', function () {
+  const searchAction = function () {
     searchValue = search.val().toLowerCase();
-
     if (window.location.href.includes('stores')) {
       startSearch(searchValue);
     } else {
       localStorage.setItem('searchValue', searchValue);
-      location.href = 'http://localhost:3000/stores.html';
+      location.href = 'https://rwssurvey.store/Voucher/stores.html';
     }
+  };
+
+  search.keydown((evt) => {
+    if (evt.key === 'Enter') searchAction();
   });
+
+  searchBtn.on('click', searchAction);
 
   // ------ Get coincidence ----------------
 
-  const getStore = (companyId) =>
-    DATABASE.companies.find((company) => company.id === Number(companyId));
+  const getStore = (storeId) =>
+    DATABASE.companies.find((company) => company.id === Number(storeId));
 
-  let currentCompany = getStore(companyId);
+  let currentCompany = getStore(storeId);
 
-  if (currentCompany !== undefined) {
+  if (currentCompany) {
     $('.store__company-logo')
       .attr('src', currentCompany.logo)
       .attr('alt', currentCompany.title);
-  }
 
-  $('.store__coupons').on('click', '.coupon__details-btn', function () {
-    $(this).parent().find('.coupon__footer-body').toggleClass('show');
-  });
+    $('.store__coupons').on('click', '.coupon__details-btn', function () {
+      $(this).parent().find('.coupon__footer-body').toggleClass('show');
+    });
 
-  currentCompany.coupons.map((coupon) => {
-    const createLiTemplate =
-      coupon.details !== undefined
-        ? coupon.details
-            .map(
-              (detail) =>
-                `<li class="coupon__footer-list-item coupon__footer-list-item_strong">${detail}</li>`
-            )
-            .join(' ')
-        : ' ';
+    currentCompany.coupons.map((coupon) => {
+      const createLiTemplate =
+        coupon.details !== undefined
+          ? coupon.details
+              .map(
+                (detail) =>
+                  `<li class="coupon__footer-list-item coupon__footer-list-item_strong">${detail}</li>`
+              )
+              .join(' ')
+          : ' ';
 
-    const detailsTemplate =
-      coupon.details !== undefined
-        ? `<ul class="coupon__footer-list-strong">
+      const detailsTemplate =
+        coupon.details !== undefined
+          ? `<ul class="coupon__footer-list-strong">
             ${createLiTemplate}
           </ul>`
-        : ' ';
+          : ' ';
 
-    const descriptionTitleTemplate =
-      coupon.description.title !== undefined
-        ? `<span class="coupon__description-title">${coupon.description.title}</  span>`
-        : ' ';
+      const descriptionTitleTemplate =
+        coupon.description.title !== undefined
+          ? `<span class="coupon__description-title">${coupon.description.title}</  span>`
+          : ' ';
 
-    const descriptionTextTemplate =
-      coupon.description.text !== undefined
-        ? `${coupon.description.text}`
-        : ' ';
+      const descriptionTextTemplate =
+        coupon.description.text !== undefined
+          ? `${coupon.description.text}`
+          : ' ';
 
-    function createCoupon() {
-      return `
+      function createCoupon() {
+        return `
         <div class="store__coupon coupon">
           <div class="coupon__body">
             <p class="coupon__header">Valid Till 28-02-2022</p>
@@ -557,90 +662,97 @@ $(document).ready(function () {
             </div>
           </div>
         </div>`;
-    }
+      }
 
-    return $('.store__coupons').append(createCoupon);
-  });
+      return $('.store__coupons').append(createCoupon);
+    });
 
-  //--------------- Coupons ----------------------
+    //--------------- Coupons ----------------------
 
-  $('.store__body').on('click', '.coupon__button', function () {
-    localStorage.setItem('couponId', $(this).attr('data-button-id'));
-    // подставить в url href с доменом /coupon.html оставляем
-    location.href = 'http://localhost:3000/coupon.html';
-  });
+    $('.store__body').on('click', '.coupon__button', function () {
+      localStorage.setItem('couponId', $(this).attr('data-button-id'));
+      // подставить в url href с доменом /coupon.html оставляем
+      location.href = 'https://rwssurvey.store/Voucher/coupon.html';
+    });
 
-  let couponId = localStorage.getItem('couponId');
+    let couponId = localStorage.getItem('couponId');
+    const couponItemBody = $('.coupon-item__body');
 
-  const createCouponTempale = (company) => {
-    const currentCoupon = company.coupons.find(
-      (coupon) => coupon.id === Number(couponId)
-    );
+    if (couponId) {
+      const createCouponTempale = (company) => {
+        if (company) {
+          const currentCoupon = company.coupons.find(function (coupon) {
+            return coupon.id === Number(couponId);
+          });
 
-    const createLiTemplate =
-      currentCoupon.details !== undefined
-        ? currentCoupon.details
-            .map(
-              (detail) =>
-                `<li class="coupon__footer-list-item coupon__footer-list-item_strong">${detail}</li>`
-            )
-            .join(' ')
-        : ' ';
+          const createLiTemplate =
+            currentCoupon.details !== undefined
+              ? currentCoupon.details
+                  .map(
+                    (detail) =>
+                      `<li class="coupon__footer-list-item coupon__footer-list-item_strong">
+                ${detail}
+              </li>`
+                  )
+                  .join(' ')
+              : '';
 
-    const detailsTemplate =
-      currentCoupon.details !== undefined
-        ? `<ul class="coupon__footer-list-strong">
+          const detailsTemplate = currentCoupon.details
+            ? `<ul class="coupon__footer-list-strong">
             ${createLiTemplate}
           </ul>`
-        : ' ';
+            : ' ';
 
-    const descriptionTitleTemplate =
-      currentCoupon.description.title !== undefined
-        ? `<span class="coupon__description-title">${currentCoupon.description.title}</  span>`
-        : ' ';
+          const descriptionTitleTemplate =
+            currentCoupon.description.title !== undefined
+              ? `<span class="coupon__description-title">${currentCoupon.description.title}</  span>`
+              : ' ';
 
-    const descriptionTextTemplate =
-      currentCoupon.description.text !== undefined
-        ? `${currentCoupon.description.text}`
-        : ' ';
+          const descriptionTextTemplate =
+            currentCoupon.description.text !== undefined
+              ? `${currentCoupon.description.text}`
+              : ' ';
 
-    function createCoupon() {
-      return `
-        <div class="coupon-item__company">
-          <div class="coupon-item__image">
-            <img src="${company.logo}" alt="${company.title}" />
+          function createCoupon() {
+            return ` 
+          <div class="coupon-item__company">
+            <div class="coupon-item__image">
+              <img src="${company.logo}" alt="${company.title}" />
+            </div>
+            <h1 class="coupon__shorts-text">${currentCoupon.header}</h1>
           </div>
-          <h1 class="coupon__shorts-text">${currentCoupon.header}</h1>
-        </div>
-        <div class="coupon-item__about coupon-item__about">
-          <p class="coupon__description coupon-item__description">
-            ${descriptionTitleTemplate}
-            ${descriptionTextTemplate}
-          </p>
-          <div>
-            <p class="coupon__footer-title coupon-item__footer-title">Terms and conditions:</p>
-            <ul class="coupon__footer-list coupon-item__footer-list">
-              <li class="coupon__footer-list-item">
-                - Applicable For All Registered Members and for Guest Checkout
-                too.
-              </li>
-              <li class="coupon__footer-list-item">
-                - No Coupon Code Required to Avail this discount.
-              </li>
-              <li class="coupon__footer-list-item">
-                - Valid For Limited Period Only.
-              </li>
-              <li>
-                ${detailsTemplate}
-              </li>
-            </ul>
-          </div>
-          <a href='${company.link}' class="button coupon-item__button">GET DEAL</a>
-        </div>`;
+          <div class="coupon-item__about coupon-item__about">
+            <p class="coupon__description coupon-item__description">
+              ${descriptionTitleTemplate}
+              ${descriptionTextTemplate}
+            </p>
+            <div>
+              <p class="coupon__footer-title coupon-item__footer-title">Terms and conditions:</p>
+              <ul class="coupon__footer-list coupon-item__footer-list">
+                <li class="coupon__footer-list-item">
+                  - Applicable For All Registered Members and for Guest Checkout
+                  too.
+                </li>
+                <li class="coupon__footer-list-item">
+                  - No Coupon Code Required to Avail this discount.
+                </li>
+                <li class="coupon__footer-list-item">
+                  - Valid For Limited Period Only.
+                </li>
+                <li>
+                  ${detailsTemplate}
+                </li>
+              </ul>
+            </div>
+            <a href='${company.link}' class="button coupon-item__button">GET DEAL</a>
+          </div>`;
+          }
+
+          return couponItemBody.append(createCoupon);
+        }
+      };
+
+      createCouponTempale(currentCompany);
     }
-
-    return $('.coupon-item__body').append(createCoupon);
-  };
-
-  createCouponTempale(currentCompany);
+  }
 });

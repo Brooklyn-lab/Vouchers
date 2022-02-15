@@ -27,24 +27,23 @@
    <header class="header">
   <div class="container">
     <div class="header__body">
-      <div class="header__logo-link">
+      <a href='#' class="header__logo-link disable">
         <img src="./img/logo.svg" width="194" height="50" alt="PROFIT VOUCHERS" />
-      </div>
+      </a>
 
       <nav class="header__nav-wrapper">
         <ul class="header__nav-list">
           <li class="header__nav-item">
-            <a href="/index.html" class="header__nav-item-link">Home</a>
+            <a href="/Voucher/index.html" class="header__nav-item-link">Home</a>
           </li>
           <li class="header__nav-item">
-            <a href="/stores.html" class="header__nav-item-link">Stores</a>
+            <a href="/Voucher/stores.html" class="header__nav-item-link">Stores</a>
           </li>
           <li class="header__nav-item">
-            <a href="/about.html" class="header__nav-item-link">About Us</a>
+            <a href="/Voucher/about.html" class="header__nav-item-link">About Us</a>
           </li>
-
           <li class="header__nav-item">
-            <a href="/contacts.html" class="header__nav-item-link">Contacts</a>
+            <a href="/Voucher/contacts.html" class="header__nav-item-link">Contacts</a>
           </li>
         </ul>
       </nav>
@@ -99,13 +98,27 @@
   </div>
 
   <!-- Slider End -->
+
+  <!-- Stores End -->
+
+  <div class="preview__coupons">
+    <div class="container">
+      <h2 class="content-title">Latest Coupons & Deals</h2>
+      <div class="preview__coupons-body"></div>
+    </div>
+  </div>
+
+  <!-- Stores End -->
+
   <!-- Stores End -->
 
   <div class="preview__stores">
     <div class="container">
       <h2 class="content-title">More Than 1000+ Stores In One Place!</h2>
       <div class="preview__stores-body"></div>
-      <a class="button preview__stores-button" href="../../stores.html">View All Stores</a>
+      <a class="button preview__stores-button" href="/Voucher/stores.html"
+        >View All Stores</a
+      >
     </div>
   </div>
 
@@ -116,13 +129,38 @@
    <footer class="footer">
    <div class="container">
       <div class="footer__body">
+         <div class="footer__logo">
+            <img src="./img/logo-footer.svg" width="194" height="50" alt="PROFIT VOUCHERS" />
+         </div>
+         <div class="footer__list-wrapper">
+            <ul class="footer__list">
+               <li class="footer__list-title">Quick links</li>
+               <li class="footer__list-item">
+                  <a href="#" target="_blank">Privacy Policy</a>
+               </li>
+               <li class="footer__list-item">
+                  <a href="#" target="_blank">Terms & Conditions</a>
+               </li>
+               <li class="footer__list-item">
+                  <a href="/Voucher/about.html">About us</a>
+               </li>
+            </ul>
+            <ul class="footer__list">
+               <li class="footer__list-title">Contact us</li>
+            </ul>
+         </div>
+      </div>
+      <div class="footer__bottom">
+         <p class="footer__bottom-text">© 2022 All rights reserved by ProfitVouchers.com</p>
+         <p class="footer__bottom-text">"If you make a purchase after clicking on the links on this site, ProfitVouchers.com may earn an affiliate commission from the site you visit."</p>
       </div>
    </div>
 </footer>
 
    <script src="libs/jquery-3.5.0.min.js"></script>
 <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
-<script src="js/script.min.js"></script>
+<script src="js/script.js"></script>
+<!-- <script src="js/script.min.js"></script> -->
 
 </body>
 

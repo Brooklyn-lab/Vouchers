@@ -35,12 +35,83 @@
   font-size: 15px;
 }
 
+// Coupons
+
+.preview {
+  &__coupons {
+    padding: 120px 0;
+    background: $white;
+
+    @media screen and (max-width: 576px) {
+      padding: 80px 0 20px;
+    }
+  }
+
+  &__coupons-body {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 60px 40px;
+    margin: 80px 0 60px;
+  }
+
+  &__coupons-item {
+    background: $white;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.25);
+    border-radius: 5px;
+    padding: 50px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    max-width: 270px;
+    width: 100%;
+    text-align: center;
+  }
+
+  &__coupons-item-logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 160px;
+  }
+
+  &__coupons-item-title {
+    color: $black;
+    @include fonts(18px, 22px, 600);
+    margin-bottom: 30px;
+  }
+
+  &__coupons-item-button {
+    color: $white;
+    background: #ffc200;
+    padding: 15px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-transform: uppercase;
+    @include fonts(16px, 19px, 600);
+    margin-bottom: 20px;
+    cursor: pointer;
+  }
+
+  &__coupons-item-date {
+    color: #ff0000;
+    @include fonts(14px, 19px, 400);
+  }
+}
+
 // Stores
 
 .preview {
   &__stores {
     background: #fbfbfb;
     padding: 60px 0 120px;
+
+    @media screen and (max-width: 576px) {
+      padding: 60px 0;
+    }
   }
 
   &__stores-body {

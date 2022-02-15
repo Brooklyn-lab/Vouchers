@@ -1,9 +1,17 @@
 .store {
   padding: 0 0 120px;
 
+  @media screen and (max-width: 576px) {
+    padding: 0 0 60px;
+  }
+
   &__body {
     display: flex;
     justify-content: space-between;
+
+    @media screen and (max-width: 700px) {
+      flex-direction: column;
+    }
   }
 
   &__company {
@@ -11,21 +19,21 @@
     box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.25);
     border-radius: 10px;
     height: 300px;
-    width: 300px;
+    max-width: 300px;
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-  }
+    margin-right: 30px;
 
-  &__company-logo {
+    @media screen and (max-width: 700px) {
+      margin: 0 auto 35px;
+    }
   }
 
   &__coupons {
     max-width: 840px;
     width: 100%;
-  }
-
-  &__coupon {
   }
 }
 
@@ -51,6 +59,18 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+
+    @media screen and (max-width: 900px) {
+      flex-direction: column;
+    }
+
+    @media screen and (max-width: 700px) {
+      flex-direction: initial;
+    }
+
+    @media screen and (max-width: 576px) {
+      flex-direction: column;
+    }
   }
 
   &__shorts {
@@ -67,6 +87,18 @@
 
   &__about {
     width: 100%;
+
+    @media screen and (max-width: 900px) {
+      margin: 25px 0;
+    }
+
+    @media screen and (max-width: 700px) {
+      margin: 0;
+    }
+
+    @media screen and (max-width: 576px) {
+      margin: 20px 0;
+    }
   }
 
   &__title {
@@ -123,11 +155,29 @@
 }
 
 .coupon-item {
+  padding: 0 0 80px 0;
+
+  @media screen and (max-width: 576px) {
+    padding: 0 0 40px 0;
+  }
+
   &__body {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 40px 120px;
+
+    @media screen and (max-width: 1100px) {
+      padding: 40px 80px;
+    }
+
+    @media screen and (max-width: 992px) {
+      padding: 40px;
+    }
+
+    @media screen and (max-width: 768px) {
+      flex-direction: column;
+    }
   }
 
   &__company {
@@ -135,6 +185,15 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
+
+    @media screen and (max-width: 992px) {
+      margin-right: 30px;
+      width: 100%;
+    }
+
+    @media screen and (max-width: 768px) {
+      margin: 0 0 30px 0;
+    }
   }
 
   &__image {
@@ -156,5 +215,9 @@
 
   &__about {
     max-width: 460px;
+
+    @media screen and (max-width: 992px) {
+      width: 100%;
+    }
   }
 }

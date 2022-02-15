@@ -1,0 +1,20 @@
+// {
+//   companies: [
+//     {
+//       id: 1,
+//       title: "company 1",
+//       logo: "../img/",
+//       coupones: [
+//         {
+//           id: 1,
+//           title: "Get 50% Discount",
+//           description: "Even more further reductions. The Winter Sale. Many lines 50% Off",
+//           details: {
+//             title: "Terms and conditions:",
+
+//           }
+//         }
+//       ]
+//     }
+//   ]
+// }
